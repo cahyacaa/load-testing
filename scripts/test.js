@@ -6,7 +6,8 @@ const errorRate = new Rate('errors');
 const getRequestTrend = new Trend('get_request_duration');
 const postRequestTrend = new Trend('post_request_duration');
 
-const API_BASE_URL = 'http://202.10.36.65:8005/api/v1/user/events?page=1&per_page=9999&search=&sort_field=created_at&sort_direction=asc';
+// const API_BASE_URL = 'http://202.10.36.65:8005/api/v1/user/events?page=1&per_page=9999&search=&sort_field=created_at&sort_direction=asc';
+const API_BASE_URL = 'https://google.com';
 // const API_BASE_URL = 'http://202.10.36.65:8080/cpu';
 const AUTH_TOKEN = '137914|GJZDZ4w8d0dPcxu5G5dQAJpMYUshyICSQowd7x4U';
 
@@ -68,7 +69,7 @@ export function getRequests() {
   
   check(getListResponse, {
     'GET items status is 200': (r) => r.status === 200,
-    'GET items response is valid': (r) => r.body?.length > 0,
+    'GET items response is valid': (r) => r.body.length > 0,
   });
   getRequestTrend.add(getListResponse.timings.duration);
 

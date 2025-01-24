@@ -34,6 +34,7 @@ services:
       - GF_SECURITY_ADMIN_PASSWORD= admin
     volumes:
       - grafana-data:/var/lib/grafana
+      - ./grafana/provisioning/datasource:/etc/grafana/provisioning/datasource
     depends_on:
       - influxdb
 

@@ -4,7 +4,7 @@ services:
     volumes:
       - ./scripts:/scripts
     environment:
-      - K6_OUT=influxdb=http://influxdb:8086/k6
+      - K6_OUT=influxdb=http://k6:k6pass@influxdb:8086/k6
     command: run /scripts/test.js
     depends_on:
       - influxdb
@@ -17,6 +17,9 @@ services:
     environment:
       - INFLUXDB_DB=k6
       - INFLUXDB_HTTP_MAX_BODY_SIZE=0
+      - INFLUXDB_ADMIN_ENABLED= 'true'
+      - INFLUXDB_USER= k6
+      - INFLUXDB_PASSWORD= k6pass
     volumes:
       - influxdb-data:/var/lib/influxdb
 
@@ -27,6 +30,8 @@ services:
     environment:
       - GF_AUTH_ANONYMOUS_ENABLED=true
       - GF_AUTH_ANONYMOUS_ORG_ROLE=Admin
+      - GF_SECURITY_ADMIN_USER= admin
+      - GF_SECURITY_ADMIN_PASSWORD= admin
     volumes:
       - grafana-data:/var/lib/grafana
     depends_on:
